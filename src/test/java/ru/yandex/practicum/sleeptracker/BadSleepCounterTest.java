@@ -33,8 +33,8 @@ class BadSleepCounterTest {
 
     @Test
     void shouldReturnZeroWhenNoBadSession() {
-        List<SleepingSession> goodSessions = List.of
-                (new SleepingSession(LocalDateTime.now(), LocalDateTime.now().plusHours(8), SleepQuality.GOOD));
+        List<SleepingSession> goodSessions = List.of(
+                new SleepingSession(LocalDateTime.now(), LocalDateTime.now().plusHours(8), SleepQuality.GOOD));
 
         SleepAnalysisResult result = badSleep.apply(goodSessions);
 
