@@ -21,7 +21,7 @@ public class SleepTrackerApp {
     private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
-    private final List<Function<List<SleepingSession>, SleepAnalysisResult>> ANALYTIC_FUNCTIONS =
+    private final List<Function<List<SleepingSession>, SleepAnalysisResult>> analyticFunctions  =
             List.of(new SessionCounter(),
                     new MinDurationSession(),
                     new MaxDurationSession(),
@@ -47,7 +47,7 @@ public class SleepTrackerApp {
     }
 
     List<SleepAnalysisResult> analyzeSessions(List<SleepingSession> sessions) {
-        return ANALYTIC_FUNCTIONS.stream()
+        return analyticFunctions.stream()
                 .map(function -> function.apply(sessions))
                 .collect(Collectors.toList());
     }
@@ -67,8 +67,10 @@ public class SleepTrackerApp {
         List<SleepingSession> sessions = new ArrayList<>();
 
         try (Stream<String> logLines = Files.lines(file.toPath(), StandardCharsets.UTF_8)) {
-            sessions = logLines.map(this::parseLine).filter(Optional::isPresent).
-                    map(Optional::get).collect(Collectors.toList());
+            sessions = logLines.map(this::parseLine)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .collect(Collectors.toList());
 
             if (sessions.isEmpty()) {
                 System.out.println("Пустой файл " + file.getName());
