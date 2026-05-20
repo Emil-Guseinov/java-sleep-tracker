@@ -25,8 +25,8 @@ public class ChronotypeAnalyzer implements Function<List<SleepingSession>, Sleep
         if (nightTypes.isEmpty()) {
             return new SleepAnalysisResult("Хронотип пользователя", Chronotype.PIGEON);
         }
-        Map<Chronotype, Long> counts = nightTypes.stream().
-                collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        Map<Chronotype, Long> counts = nightTypes.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         Chronotype finalChronotype = determineUserChronotype(counts);
         return new SleepAnalysisResult("Хронотип пользователя", finalChronotype);
     }
