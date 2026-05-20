@@ -27,7 +27,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    void ShouldAnalyzeSessionsCorrectly() {
+    void shouldAnalyzeSessionsCorrectly() {
 
         SleepingSession session1 = new SleepingSession(
                 LocalDateTime.of(2025, 10, 1, 23, 0),
