@@ -1,4 +1,7 @@
-package ru.yandex.practicum.sleeptracker;
+package ru.yandex.practicum.sleeptracker.analytics;
+
+import ru.yandex.practicum.sleeptracker.model.SleepAnalysisResult;
+import ru.yandex.practicum.sleeptracker.model.SleepingSession;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

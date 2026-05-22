@@ -1,5 +1,10 @@
 package ru.yandex.practicum.sleeptracker;
 
+import ru.yandex.practicum.sleeptracker.analytics.*;
+import ru.yandex.practicum.sleeptracker.model.SleepAnalysisResult;
+import ru.yandex.practicum.sleeptracker.model.SleepQuality;
+import ru.yandex.practicum.sleeptracker.model.SleepingSession;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
