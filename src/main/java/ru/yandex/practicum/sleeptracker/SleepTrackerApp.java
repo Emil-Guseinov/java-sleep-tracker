@@ -10,8 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -22,11 +20,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SleepTrackerApp {
-    private static final Path SLEEP_LOG = Paths.get("src/main/resources/sleep_log.txt");
     private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
-    private final List<Function<List<SleepingSession>, SleepAnalysisResult>> analyticFunctions  =
+    private final List<Function<List<SleepingSession>, SleepAnalysisResult>> analyticFunctions =
             List.of(new SessionCounter(),
                     new MinDurationSession(),
                     new MaxDurationSession(),
@@ -37,9 +34,17 @@ public class SleepTrackerApp {
 
     public static void main(String[] args) {
         SleepTrackerApp tracker = new SleepTrackerApp();
+        if (args.length == 0) {
+            System.out.println("Укажите путь к файлу с логом сна в аргументах запуска.");
+            return;
+        }
+
 
         try {
-            List<SleepingSession> sessions = tracker.readFile(tracker.getFile());
+            String filePath = args[0];
+            System.out.println("Файл " + filePath + " получен");
+
+            List<SleepingSession> sessions = tracker.readFile(getFile(filePath));
             List<SleepAnalysisResult> result = tracker.analyzeSessions(sessions);
 
             result.forEach(System.out::println);
@@ -57,10 +62,10 @@ public class SleepTrackerApp {
                 .collect(Collectors.toList());
     }
 
-    private File getFile() throws FileNotFoundException {
+    private static File getFile(String filePath) throws FileNotFoundException {
 
 
-        File file = SleepTrackerApp.SLEEP_LOG.toFile();
+        File file = new File(filePath);
         if (!file.exists()) {
             throw new FileNotFoundException("Не существует файл " + file);
         }

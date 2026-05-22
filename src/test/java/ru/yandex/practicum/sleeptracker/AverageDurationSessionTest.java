@@ -1,5 +1,6 @@
 package ru.yandex.practicum.sleeptracker;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.sleeptracker.analytics.AverageDurationSession;
 import ru.yandex.practicum.sleeptracker.model.SleepAnalysisResult;
@@ -17,6 +18,7 @@ class AverageDurationSessionTest {
     AverageDurationSession average = new AverageDurationSession();
 
     @Test
+    @DisplayName("Должен корректно считать среднюю продолжительность сессии")
     void shouldReturnCorrectAverageDurationWhenListHasElements() {
         List<SleepingSession> sessions = List.of(
                 new SleepingSession(LocalDateTime.of(2025, 10, 1, 22, 0),
@@ -33,6 +35,7 @@ class AverageDurationSessionTest {
     }
 
     @Test
+    @DisplayName("Должен возвращать ноль")
     void shouldReturnZeroWhenIsEmpty() {
         List<SleepingSession> sessions = Collections.emptyList();
 
